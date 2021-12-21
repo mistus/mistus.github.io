@@ -283,6 +283,10 @@
             function inputJson() {
                 var gachaInfo = document.getElementById("gachaInfo");
                 var inputer = document.getElementById("json_inputer");
+                    
+                inputer.value = inputer.value.replaceAll('物品', 'name');
+                inputer.value = inputer.value.replaceAll('虛寶價值', 'rare');
+                inputer.value = inputer.value.replaceAll('數量', 'amount');
 
                 gachaInfo.value = inputer.value;
                 loadInfoTable();
