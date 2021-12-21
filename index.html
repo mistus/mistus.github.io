@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>轉蛋模擬器</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script>
+
+            //result[key] = value;
+            var gachaResult = new Object();
+            var gachaCount = 0;
+            // const gachaResult = [];
+
+
+            /** 時光超越者轉蛋 (08/03-08/17)**/
+            function 時光超越者轉蛋() {
+                return "[" +
+                    '{"name":"料理箱子[轉蛋專用]", "rare":"B", "amount":1},'+
+                    '{"name":"擴音器[轉蛋專用]", "rare":"B", "amount":8},'+
+                    '{"name":"高級戰鬥藥10個箱子", "rare":"B", "amount":1},'+
+                    '{"name":"隨地倉庫使用券[轉蛋專用]", "rare":"B", "amount":5},'+
+                    '{"name":"魔法糖果", "rare":"B", "amount":5},'+
+
+                    '{"name":"高級料理箱[轉蛋專用]", "rare":"A", "amount":1},'+
+                    '{"name":"變身卷軸秘笈", "rare":"A", "amount":2},'+
+                    '{"name":"古代英雄的英勇", "rare":"A", "amount":5},'+
+                    '{"name":"古代英雄的恩惠", "rare":"A", "amount":5},'+
+                    '{"name":"影子職業套裝箱", "rare":"A", "amount":2},'+
+                    '{"name":"忽克連影子精煉鎚", "rare":"A", "amount":1},'+
+                    '{"name":"影子職業套裝箱", "rare":"A", "amount":2},'+
+
+                    '{"name":"神話英雄的英勇", "rare":"S", "amount":3},'+
+                    '{"name":"神話英雄的恩惠", "rare":"S", "amount":3},'+
+                    '{"name":"時光超越能量", "rare":"S", "amount":1},'+
+                    '{"name":"(服飾)掉落眼淚", "rare":"S", "amount":1},'+
+                    '{"name":"十字斬首者影子技能箱", "rare":"S", "amount":1},'+
+                    '{"name":"古代英雄武器盒", "rare":"S", "amount":1},'+
+                    '{"name":"影子苦無手套", "rare":"S", "amount":1},'+
+                    '{"name":"影子苦無神盾", "rare":"S", "amount":1},'+
+                    '{"name":"影子苦無鎧甲", "rare":"S", "amount":1},'+
+
+                    '{"name":"影子無極箱", "rare":"SS", "amount":1},'+
+                    '{"name":"(服飾)布林喜德的王冠", "rare":"SS", "amount":1},'+
+                    '{"name":"(服飾)超大蝴蝶結", "rare":"SS", "amount":1},'+
+                    '{"name":"古代龍紋巨劍改良箱", "rare":"SS", "amount":1},'+
+                    '{"name":"(服飾)泡泡波利池", "rare":"SS", "amount":1},'+
+                    '{"name":"活體水瓶研究頭冠", "rare":"SS", "amount":1},'+
+                    '{"name":"時光超越者之靴", "rare":"SS", "amount":1},'+
+                    '{"name":"賭徒之印", "rare":"SS", "amount":1},'+
+
+                    '{"name":"王水瓶", "rare":"SSS", "amount":1},'+
+                    '{"name":"闇●妖術師 西里亞卡片", "rare":"SSS", "amount":1}'+
+                "]";
+            }
+            
+            /** 驚奇怪異轉蛋 (08/17-09/07) **/
+            function 驚奇怪異轉蛋() {
+                return '['+
+                            '{"name":"料理箱子[轉蛋專用]", "rare":"B", "amount":1},'+
+                            '{"name":"擴音器[轉蛋專用]", "rare":"B", "amount":8},'+
+                            '{"name":"蜂后卷軸", "rare":"B", "amount":5},'+
+                            '{"name":"恢復力提升藥水箱子10個", "rare":"B", "amount":1},'+
+                            '{"name":"小雪獸冰茶", "rare":"B", "amount":5},'+
+                            '{"name":"高級料理箱[轉蛋專用]", "rare":"A", "amount":1},'+
+                            '{"name":"時光封印鑰匙", "rare":"A", "amount":5},'+
+                            '{"name":"古代英雄的英勇", "rare":"A", "amount":5},'+
+                            '{"name":"古代英雄的恩惠", "rare":"A", "amount":5},'+
+                            '{"name":"日系公主波浪雙髮辮禮盒", "rare":"A", "amount":1},'+
+                            '{"name":"忽克連影子精煉鎚", "rare":"A", "amount":1},'+
+                            '{"name":"(服飾)木馬", "rare":"A", "amount":1},'+
+                            '{"name":"神話英雄的英勇", "rare":"S", "amount":4},'+
+                            '{"name":"神話英雄的恩惠", "rare":"S", "amount":4},'+
+                            '{"name":"(服飾)嘴咬甜甜圈", "rare":"S", "amount":1},'+
+                            '{"name":"影子剛強箱", "rare":"S", "amount":1},'+
+                            '{"name":"時光超越能量", "rare":"S", "amount":1},'+
+                            '{"name":"古代英雄武器盒", "rare":"S", "amount":1},'+
+                            '{"name":"影子奧義忍術手套", "rare":"S", "amount":1},'+
+                            '{"name":"影子奧義忍術神盾", "rare":"S", "amount":1},'+
+                            '{"name":"影子奧義忍術鎧甲", "rare":"S", "amount":1},'+
+                            '{"name":"強烈靈魂精髓", "rare":"SS", "amount":1},'+
+                            '{"name":"(服飾)施密特國王盧恩披風", "rare":"SS", "amount":1},'+
+                            '{"name":"紅玫瑰左輪手槍改良箱", "rare":"SS", "amount":1},'+
+                            '{"name":"地獄黑光格林機槍改良箱", "rare":"SS", "amount":1},'+
+                            '{"name":"(服飾)念動齒輪", "rare":"SS", "amount":1},'+
+                            '{"name":"活體天平研究頭冠", "rare":"SS", "amount":1},'+
+                            '{"name":"強力精華球", "rare":"SS", "amount":1},'+
+                            '{"name":"時光斗篷寶箱", "rare":"SS", "amount":1},'+
+                            '{"name":"忽克連高級影子精煉鎚", "rare":"SS", "amount":1},'+
+                            '{"name":"王水瓶", "rare":"SSS", "amount":1},'+
+                            '{"name":"幽暗夢魘卡片", "rare":"SSS", "amount":1}'+
+                ']';
+            }
+
+            function getDefaultJson() {
+                return 驚奇怪異轉蛋();
+            }
+
+            /** 儲存資料 **/
+            function makeHiddenGacha(){
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.value = getDefaultJson();
+                input.id = "gachaInfo";
+
+                var body = document.getElementById("body");
+                body.appendChild(input);
+            }
+
+            /** 讀取Table **/
+            function loadInfoTable()
+            {
+                var jsonInfo = document.getElementById("gachaInfo").value;
+
+                //[{name:a, rare:s, amount:1}, ...]
+                infoObj = JSON.parse(jsonInfo);
+
+                var tBody = document.getElementById("tbody");
+                tBody.innerHTML="";
+                infoObj.forEach(function (item){
+                    var row = document.createElement("tr");
+                    row.appendChild(makeTdCell(item.name));
+                    row.appendChild(makeTdCell(item.rare));
+                    row.appendChild(makeTdCell(item.amount));
+                    tBody.appendChild(row);
+                });
+            }
+
+            /** 初始化 **/
+            function init() {
+                makeHiddenGacha();
+                loadInfoTable();
+            }
+
+            /** 計算轉出SSR次數 **/
+            function gachaFouceSSS()
+            {
+                var count = 1;
+                while (gachaRareLevel() != "SSS"){
+                    count++;
+            	    
+                    if(count>999999){
+                       return; 
+                    }
+		        }
+
+                /** 輸出 **/
+                var result = document.getElementById("result");
+                result.innerHTML = "";
+
+                var p = document.createElement('p');
+                p.className = "bg-secondary text-white";
+                p.innerText = "轉到SSS總共花了" + count + "次";   
+                result.appendChild(p);
+            }
+
+            /** 轉蛋 **/
+            function gachaOnce() {
+                // var present = gacha();
+
+                /** 輸出 **/
+                var result = document.getElementById("result");
+                result.innerHTML = "";
+
+                var present = gacha();
+                var p = makeGachaResultElement(present.name + "x" + present.amount + "!!");  
+                result.appendChild(p);
+            }
+
+            /** 轉蛋 5次 **/
+            function gachaFiveTimes() {
+                /** 輸出 **/
+                var result = document.getElementById("result");
+                result.innerHTML = "";
+
+                for (let i = 0; i < 5; i++) {
+                    var present = gacha();
+                    var p = makeGachaResultElement(present.name + "x" + present.amount + "!!");
+                    result.appendChild(p);
+                }
+
+            }
+
+            function makeGachaResultElement(content) {
+                var p = document.createElement('p');
+                p.className = "bg-secondary text-white";
+                p.innerText = content;   
+                return p;
+            }
+
+            
+            function gacha()
+            {
+                var rareLevel = gachaRareLevel();
+                
+                var jsonInfo = document.getElementById("gachaInfo").value;
+                infoObj = JSON.parse(jsonInfo);
+
+                /** 骰禮物 **/
+                var items = infoObj.filter(item => item.rare == rareLevel);
+                var index = getRandomIntInclusive(0, items.length-1);
+                var present = items[index];
+
+                addGachaResult(present);
+                return present;
+            }
+
+
+
+            /** 骰稀有度 **/
+            /** B, A, S, SS, SSS**/
+            function gachaRareLevel()
+            {
+                //搞不好SSS是0.001? 精準度到小數點第三位
+                var probabilityB = Math.floor(document.getElementById("probability_b").value * 1000);
+                var probabilityA = Math.floor(document.getElementById("probability_a").value * 1000);
+                var probabilityS = Math.floor(document.getElementById("probability_s").value * 1000);
+                var probabilitySS = Math.floor(document.getElementById("probability_ss").value * 1000);
+                var probabilitySSS = Math.floor(document.getElementById("probability_sss").value * 1000);
+
+                var probabilitySum = probabilityB+probabilityA+probabilityS+probabilitySS+probabilitySSS;
+
+
+                var randomNumber = getRandomIntInclusive(1, probabilitySum);
+                
+                //假設B = 70000, A = 25000, S = 4000, SS = 1000, S = 10
+                //隨機最低值1 最高值100010
+                //1-70000為B, 70001-950000為A, 950001-990000為S, 990001-100000為SS, 100001-100010為SS
+
+                if(randomNumber <= probabilityB) {
+                    return "B";
+                }
+
+                if(randomNumber <= probabilityB+probabilityA) {
+                    return "A";
+                }
+
+                if(randomNumber <= probabilityB+probabilityA+probabilityS) {
+                    return "S";
+                }
+
+                if(randomNumber <= probabilityB+probabilityA+probabilityS+probabilitySS) {
+                    return "SS";
+                }
+
+                if(randomNumber <= probabilityB+probabilityA+probabilityS+probabilitySS+probabilitySSS) {
+                    return "SSS";
+                }
+
+                console.log("錯誤");
+            }
+            
+            /** 製作td **/
+            function makeTdCell(content)
+            {
+                var cell = document.createElement("td");
+                var cellText = document.createTextNode(content);
+                cell.appendChild(cellText);
+                return cell;
+            }
+
+            /** 包括的に 2 つの値の間のランダムな整数を得る **/
+            /** https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/random **/
+            function getRandomIntInclusive(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+            }
+
+
+            function outputJson() {
+                var gachaInfo = document.getElementById("gachaInfo");
+                var inputer = document.getElementById("json_inputer");
+                inputer.value = gachaInfo.value;
+            }
+
+            function inputJson() {
+                var gachaInfo = document.getElementById("gachaInfo");
+                var inputer = document.getElementById("json_inputer");
+
+                gachaInfo.value = inputer.value;
+                loadInfoTable();
+            }
+
+            function changeGachaContent(gachaJsonData){
+                document.getElementById("gachaInfo").value = gachaJsonData;
+                loadInfoTable();
+            }
+
+            function clearGachaResult(){
+                gachaResult = new Object();
+                gachaCount = 0;
+            }
+
+            function addGachaResult(present) {
+
+                gachaCount++;
+
+                var currentPresentResult = gachaResult[present.name];
+                if(currentPresentResult == undefined) {
+                    gachaResult[present.name] = present;
+                    return
+                }
+                currentPresentResult.amount = currentPresentResult.amount + present.amount;
+            }
+
+            function showModal()
+            {
+                var mymodal = $('#myModal');
+                var body = mymodal.find('.modal-body');
+                body.empty();
+
+                var len = Object.keys(gachaResult).length
+                if(len == 0) {
+                    body.append(makeItemContent("沒有東西"));
+                    mymodal.modal('show');
+                    return;
+                }
+
+                var textTag = document.createElement('h5');
+                textTag.innerText = "共" + gachaCount + "抽";
+                body.append(textTag);
+
+                for(const [key, present] of Object.entries(gachaResult)) {
+                    content = present.name + "x" + present.amount
+                    body.append(makeItemContent(content));
+                }
+            
+                mymodal.modal('show');
+            }
+
+            function makeItemContent(content){
+                var element = document.createElement('h6');
+                element.innerText = content;   
+                return element;
+            }
+       </script>
+    </head>
+<body id = "body">
+    <!-- 標題 -->
+    <div class="jumbotron text-center">
+        <h1>轉蛋模擬器</h1>
+        <p>運氣校正回歸!</p>
+    </div>
+
+    <!-- 機率 -->
+    <div class="container">
+      <h6>機率 (預設參考波利掉落)</h6>
+      <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">B</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="70" id="probability_b">
+
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">A</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="25" id="probability_a">
+            
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">S</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="4" id="probability_s">
+              
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">SS</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="1" id="probability_ss">
+            
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">SSS</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="0.01" id="probability_sss">
+      </div>
+    </div>
+
+    <div class="container" >
+      <button type="button" class="btn btn-dark offset-md-0" onclick="changeGachaContent(時光超越者轉蛋())" > 時光超越者轉蛋 </button>
+      <button type="button" class="btn btn-dark" onclick="changeGachaContent(驚奇怪異轉蛋())" > 驚奇怪異轉蛋 </button>
+      <button type="button" class="btn btn-danger offset-md-4" onclick="gachaOnce()" > 轉蛋模擬 </button>
+      <button type="button" class="btn btn-danger" onclick="gachaFiveTimes()" > 轉蛋五連模擬 </button>
+      <button type="button" class="btn btn-danger" onclick="gachaFouceSSS()" > SSS抽獎次數模擬</button>
+    
+      <!-- <button type="button" class="btn btn-secondary col-md-1" data-toggle="modal" data-target="#myModal"> -->
+    <button type="button" class="btn btn-secondary col-md-1" onclick="showModal()">
+        物品
+      </button>
+    </div>
+
+    <hr>
+
+    <!-- 結果 -->
+    <div class="container" id="result">
+        <!-- 注入 -->
+    </div>
+
+    <hr>
+    <!-- 轉蛋內容 -->
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>物品名</th>
+                <th>稀有度</th>
+                <th>數量</th>
+              </tr>
+            </thead>
+            <tbody id = "tbody">
+                <!-- 初始化後出現 -->
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="form-group container">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="15" id = "json_inputer"></textarea>
+    </div>
+
+    <div class="container text-right" >
+        <button type="button" class="btn btn-danger" onclick="outputJson()" > 匯出 </button>
+        <button type="button" class="btn btn-danger" onclick="inputJson()" > 匯入 </button>
+    </div>
+  
+
+
+    <!-- 提示框 -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+     
+          <!-- 頭部 -->
+          <div class="modal-header">
+            <h4 class="modal-title">你的戰利品</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+     
+          <!-- body -->
+          <div class="modal-body" id="item_box">
+
+          </div>
+     
+          <!-- 底部 -->
+          <div class="modal-footer">
+            <button class="btn btn-secondary offset-md-0" data-dismiss="modal" onclick="clearGachaResult()">清除結果</button>
+            <input hidden id="gacha_counter" type="number" value=0>
+          </div>
+     
+        </div>
+      </div>
+    </div>
+
+  <script>  init(); </script>
+  </body>
+</html>
+
