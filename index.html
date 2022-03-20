@@ -292,6 +292,22 @@
                 loadInfoTable();
             }
 
+	   function inputByRO(){
+                var url = document.getElementById("roUrl");
+                var url = "https://yfi3yxmse0.execute-api.us-east-1.amazonaws.com/loader?url="+url.value;
+
+                $.ajax(url,
+                    {
+                        type: 'get',
+                        success: function(result){
+                            document.getElementById("gachaInfo").value = JSON.stringify(result);
+                            loadInfoTable();
+                        }
+                    }
+                );
+                
+            }
+		
             function changeGachaContent(gachaJsonData){
                 document.getElementById("gachaInfo").value = gachaJsonData;
                 loadInfoTable();
@@ -421,7 +437,11 @@
         </table>
     </div>
 
-
+    <div class="form-group container">
+        <input type="text" placeholder="請輸入轉蛋公告網址" id = "roUrl"/>
+        <button type="button" class="btn btn-danger" onclick="inputByRO()" > 匯入 </button>
+    </div>
+	
     <div class="form-group container">
         <label for="comment">Comment:</label>
         <textarea class="form-control" rows="15" id = "json_inputer"></textarea>
