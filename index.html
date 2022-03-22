@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,48 +19,6 @@
             var gachaCount = 0;
             // const gachaResult = [];
 
-
-            /** 時光超越者轉蛋 (08/03-08/17)**/
-            function 時光超越者轉蛋() {
-                return "[" +
-                    '{"name":"料理箱子[轉蛋專用]", "rare":"B", "amount":1},'+
-                    '{"name":"擴音器[轉蛋專用]", "rare":"B", "amount":8},'+
-                    '{"name":"高級戰鬥藥10個箱子", "rare":"B", "amount":1},'+
-                    '{"name":"隨地倉庫使用券[轉蛋專用]", "rare":"B", "amount":5},'+
-                    '{"name":"魔法糖果", "rare":"B", "amount":5},'+
-
-                    '{"name":"高級料理箱[轉蛋專用]", "rare":"A", "amount":1},'+
-                    '{"name":"變身卷軸秘笈", "rare":"A", "amount":2},'+
-                    '{"name":"古代英雄的英勇", "rare":"A", "amount":5},'+
-                    '{"name":"古代英雄的恩惠", "rare":"A", "amount":5},'+
-                    '{"name":"影子職業套裝箱", "rare":"A", "amount":2},'+
-                    '{"name":"忽克連影子精煉鎚", "rare":"A", "amount":1},'+
-                    '{"name":"影子職業套裝箱", "rare":"A", "amount":2},'+
-
-                    '{"name":"神話英雄的英勇", "rare":"S", "amount":3},'+
-                    '{"name":"神話英雄的恩惠", "rare":"S", "amount":3},'+
-                    '{"name":"時光超越能量", "rare":"S", "amount":1},'+
-                    '{"name":"(服飾)掉落眼淚", "rare":"S", "amount":1},'+
-                    '{"name":"十字斬首者影子技能箱", "rare":"S", "amount":1},'+
-                    '{"name":"古代英雄武器盒", "rare":"S", "amount":1},'+
-                    '{"name":"影子苦無手套", "rare":"S", "amount":1},'+
-                    '{"name":"影子苦無神盾", "rare":"S", "amount":1},'+
-                    '{"name":"影子苦無鎧甲", "rare":"S", "amount":1},'+
-
-                    '{"name":"影子無極箱", "rare":"SS", "amount":1},'+
-                    '{"name":"(服飾)布林喜德的王冠", "rare":"SS", "amount":1},'+
-                    '{"name":"(服飾)超大蝴蝶結", "rare":"SS", "amount":1},'+
-                    '{"name":"古代龍紋巨劍改良箱", "rare":"SS", "amount":1},'+
-                    '{"name":"(服飾)泡泡波利池", "rare":"SS", "amount":1},'+
-                    '{"name":"活體水瓶研究頭冠", "rare":"SS", "amount":1},'+
-                    '{"name":"時光超越者之靴", "rare":"SS", "amount":1},'+
-                    '{"name":"賭徒之印", "rare":"SS", "amount":1},'+
-
-                    '{"name":"王水瓶", "rare":"SSS", "amount":1},'+
-                    '{"name":"闇●妖術師 西里亞卡片", "rare":"SSS", "amount":1}'+
-                "]";
-            }
-            
             /** 驚奇怪異轉蛋 (08/17-09/07) **/
             function 驚奇怪異轉蛋() {
                 return '['+
@@ -401,14 +360,12 @@
     </div>
 
     <div class="container" >
-      <button type="button" class="btn btn-dark offset-md-0" onclick="changeGachaContent(時光超越者轉蛋())" > 時光超越者轉蛋 </button>
-      <button type="button" class="btn btn-dark" onclick="changeGachaContent(驚奇怪異轉蛋())" > 驚奇怪異轉蛋 </button>
-      <button type="button" class="btn btn-danger offset-md-4" onclick="gachaOnce()" > 轉蛋模擬 </button>
+      <button type="button" class="btn btn-danger offset-md-8" onclick="gachaOnce()" > 轉蛋模擬 </button>
       <button type="button" class="btn btn-danger" onclick="gachaFiveTimes()" > 轉蛋五連模擬 </button>
       <button type="button" class="btn btn-danger" onclick="gachaFouceSSS()" > SSS抽獎次數模擬</button>
     
       <!-- <button type="button" class="btn btn-secondary col-md-1" data-toggle="modal" data-target="#myModal"> -->
-    <button type="button" class="btn btn-secondary col-md-1" onclick="showModal()">
+      <button type="button" class="btn btn-secondary col-md-1" onclick="showModal()">
         物品
       </button>
     </div>
