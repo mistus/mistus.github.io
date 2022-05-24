@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -89,6 +88,17 @@
                     row.appendChild(makeTdCell(item.amount));
                     tBody.appendChild(row);
                 });
+
+                //change rate text
+                let firstItemRareSetting = infoObj[0].rare;
+                let isNewVersionTable = this.isNumber(firstItemRareSetting.replaceAll('%', ''));
+                if (isNewVersionTable) {
+                    $('#gacha_rate_setting').hide();
+                    $('#ro_rate_setting').show();
+                } else {
+                    $('#gacha_rate_setting').show();
+                    $('#ro_rate_setting').hide();
+                }
             }
 
             /** 初始化 **/
@@ -153,23 +163,59 @@
                 return p;
             }
 
+            function makeNewGachaRateTable (gachaInfoObj) {
+                if(this.gachaRateList != null) {
+                    return;
+                }
+
+                let index = 0;
+                this.gachaRateList = [];
+                gachaInfoObj.forEach(element => {
+                    let gachaRate = element.rare * 1000;
+                    let nexIndex = index + gachaRate;
+                    this.gachaRateList[index + "_" + nexIndex] = element;
+                    index = index + gachaRate;
+                });
+            }
+
+            function newTableGetPresent(infoObj){
+                this.makeNewGachaRateTable(infoObj);
+                let luckyNumber = getRandomIntInclusive(1, 100000);
             
+                for (const [numberRate, present] of Object.entries(this.gachaRateList)) {
+                    let [min, max] = numberRate.split("_");
+                    if (min <= luckyNumber && luckyNumber <= max) {
+                        return present;
+                    }
+                }
+            }
+
+
             function gacha()
-            {
-                var rareLevel = gachaRareLevel();
-                
+            {               
                 var jsonInfo = document.getElementById("gachaInfo").value;
+                jsonInfo = jsonInfo.replaceAll('%', '');
+
                 infoObj = JSON.parse(jsonInfo);
 
+    
+                let isNewVersionTable = this.isNumber(infoObj[0].rare);
+                if (isNewVersionTable) {
+                    return this.newTableGetPresent(infoObj)
+                }
+
+                var rareLevel = gachaRareLevel();
                 /** 骰禮物 **/
                 var items = infoObj.filter(item => item.rare == rareLevel);
                 var index = getRandomIntInclusive(0, items.length-1);
                 var present = items[index];
-
                 addGachaResult(present);
                 return present;
             }
 
+            function isNumber(n) {
+                return Number(n) == n;
+            }
 
 
             /** 骰稀有度 **/
@@ -251,7 +297,7 @@
                 loadInfoTable();
             }
 
-	   function inputByRO(){
+	         function inputByRO(){
                 var url = document.getElementById("roUrl");
                 var url = "https://xvvjt9lkl6.execute-api.ap-northeast-3.amazonaws.com/loader?url="+url.value;
 
@@ -259,6 +305,7 @@
                     {
                         type: 'get',
                         success: function(result){
+                            // console.log(result);
                             document.getElementById("gachaInfo").value = JSON.stringify(result);
                             loadInfoTable();
                         }
@@ -330,33 +377,36 @@
 
     <!-- 機率 -->
     <div class="container">
-      <h6>機率 (預設參考波利掉落)</h6>
-      <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">B</span>
-          </div>
-          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="70" id="probability_b">
+      <div id="gacha_rate_setting">
+        <h6>機率 (預設參考波利掉落)</h6>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">B</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="70" id="probability_b">
 
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">A</span>
-          </div>
-          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="25" id="probability_a">
-            
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">S</span>
-          </div>
-          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="4" id="probability_s">
-              
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">SS</span>
-          </div>
-          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="1" id="probability_ss">
-            
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">SSS</span>
-          </div>
-          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="0.01" id="probability_sss">
-      </div>
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">A</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="25" id="probability_a">
+                
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">S</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="4" id="probability_s">
+                
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">SS</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="1" id="probability_ss">
+                
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">SSS</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="0.01" id="probability_sss">
+        </div>
+      </div>  
+      <h6 id="ro_rate_setting">官方提供機率套用中</h6>
     </div>
 
     <div class="container" >
