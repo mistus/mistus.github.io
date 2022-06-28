@@ -201,7 +201,9 @@
     
                 let isNewVersionTable = this.isNumber(infoObj[0].rare);
                 if (isNewVersionTable) {
-                    return this.newTableGetPresent(infoObj)
+                    let present = this.newTableGetPresent(infoObj)
+                    addGachaResult(present);
+                    return present;
                 }
 
                 var rareLevel = gachaRareLevel();
@@ -325,12 +327,16 @@
             }
 
             function addGachaResult(present) {
-
                 gachaCount++;
 
                 var currentPresentResult = gachaResult[present.name];
                 if(currentPresentResult == undefined) {
-                    gachaResult[present.name] = present;
+                    let resultObj = {
+                        name: present.name,
+                        amount: present.amount
+                    };
+			
+                    gachaResult[present.name] = resultObj;
                     return
                 }
                 currentPresentResult.amount = currentPresentResult.amount + present.amount;
