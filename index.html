@@ -102,9 +102,12 @@
             }
 
             /** 初始化 **/
-            function init() {
+            function init() {	    
                 makeHiddenGacha();
-                loadInfoTable();
+                // loadInfoTable(); 因為資料過舊而廢止, 使用新版的匯入當作預設
+                document.getElementById("roUrl").value = "https://ro.gnjoy.com.tw/notice/notice_view.aspx?id=145330";
+                inputByRO();
+                document.getElementById("roUrl").value ="";
             }
 
             /** 計算轉出SSR次數 **/
