@@ -105,8 +105,8 @@
             function init() {	    
                 makeHiddenGacha();
                 // loadInfoTable(); 因為資料過舊而廢止, 使用新版的匯入當作預設
-                document.getElementById("roUrl").value = "https://ro.gnjoy.com.tw/notice/notice_view.aspx?id=145330&useDefault=true";
-                inputByRO();
+                document.getElementById("roUrl").value = "https://ro.gnjoy.com.tw/notice/notice_view.aspx?id=145330";
+                inputByRO(true);
                 document.getElementById("roUrl").value ="";
             }
 
@@ -302,9 +302,9 @@
                 loadInfoTable();
             }
 
-	         function inputByRO(){
+	         function inputByRO(useDefault = false){
                 var url = document.getElementById("roUrl");
-                var url = "https://xvvjt9lkl6.execute-api.ap-northeast-3.amazonaws.com/loader?url="+url.value;
+                var url = "https://xvvjt9lkl6.execute-api.ap-northeast-3.amazonaws.com/loader?url="+url.value +"&useDefault="useDefault
 
                 $.ajax(url,
                     {
